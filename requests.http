@@ -1,0 +1,129 @@
+### ============================================================
+### Taskschool API - Exemplos de requisições
+### ============================================================
+### Para usar este arquivo, instale a extensão "REST Client"
+### no VS Code. Depois clique em "Send Request" acima de cada bloco.
+### ============================================================
+
+@baseUrl = http://localhost:3000
+
+### ----------------------------------------------------------
+### Documentação da API
+### ----------------------------------------------------------
+GET {{baseUrl}}/api
+
+### ----------------------------------------------------------
+### LISTAR TODAS AS TAREFAS
+### ----------------------------------------------------------
+GET {{baseUrl}}/tarefas
+
+### Filtrar só as pendentes
+GET {{baseUrl}}/tarefas?concluida=false
+
+### Filtrar só as concluídas
+GET {{baseUrl}}/tarefas?concluida=true
+
+### Filtrar por prioridade
+GET {{baseUrl}}/tarefas?prioridade=alta
+
+### Buscar no título
+GET {{baseUrl}}/tarefas?busca=Node
+
+### Combinando filtros: pendentes de alta prioridade
+GET {{baseUrl}}/tarefas?concluida=false&prioridade=alta
+
+### ----------------------------------------------------------
+### BUSCAR UMA TAREFA POR ID
+### ----------------------------------------------------------
+GET {{baseUrl}}/tarefas/1
+
+### Tarefa que não existe (deve devolver 404)
+GET {{baseUrl}}/tarefas/9999
+
+### ----------------------------------------------------------
+### CRIAR UMA NOVA TAREFA (POST)
+### ----------------------------------------------------------
+POST {{baseUrl}}/tarefas
+Content-Type: application/json
+
+{
+  "titulo": "Estudar express-validator",
+  "descricao": "Aprender a fazer validações declarativas",
+  "prioridade": "alta"
+}
+
+### Criar tarefa só com o mínimo (titulo)
+POST {{baseUrl}}/tarefas
+Content-Type: application/json
+
+{
+  "titulo": "Comprar pão"
+}
+
+### Tentativa de criar SEM título (deve devolver 400)
+POST {{baseUrl}}/tarefas
+Content-Type: application/json
+
+{
+  "prioridade": "alta"
+}
+
+### Tentativa com prioridade inválida (deve devolver 400)
+POST {{baseUrl}}/tarefas
+Content-Type: application/json
+
+{
+  "titulo": "Tarefa de teste",
+  "prioridade": "URGENTÍSSIMA"
+}
+
+### ----------------------------------------------------------
+### ATUALIZAR PARCIALMENTE (PATCH)
+### ----------------------------------------------------------
+### Marcar a tarefa 1 como concluída
+PATCH {{baseUrl}}/tarefas/1
+Content-Type: application/json
+
+{
+  "concluida": true
+}
+
+### Mudar só a prioridade
+PATCH {{baseUrl}}/tarefas/2
+Content-Type: application/json
+
+{
+  "prioridade": "baixa"
+}
+
+### Atualizar vários campos de uma vez
+PATCH {{baseUrl}}/tarefas/2
+Content-Type: application/json
+
+{
+  "titulo": "Criar API REST com SQLite",
+  "descricao": "Migrar do array em memória para banco real",
+  "prioridade": "alta"
+}
+
+### ----------------------------------------------------------
+### SUBSTITUIR UMA TAREFA INTEIRA (PUT)
+### ----------------------------------------------------------
+### PUT exige todos os campos. O que faltar vira o padrão.
+PUT {{baseUrl}}/tarefas/1
+Content-Type: application/json
+
+{
+  "titulo": "Estudar Node.js (revisado)",
+  "descricao": "Foco em async/await",
+  "prioridade": "alta",
+  "concluida": false
+}
+
+### ----------------------------------------------------------
+### REMOVER UMA TAREFA (DELETE)
+### ----------------------------------------------------------
+DELETE {{baseUrl}}/tarefas/3
+
+### Tentar remover algo que não existe (deve devolver 404)
+DELETE {{baseUrl}}/tarefas/9999

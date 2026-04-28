@@ -1,21 +1,21 @@
 {
-  "name": "senac-taskschool-backend",
+  "name": "taskschool-m4",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto do M4 da UC3 - API REST do Taskschool com CRUD completo, validacao e integracao com front-end",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wbuback/senac-taskschool-backend.git"
+  "keywords": ["senac", "uc3", "express", "api-rest", "taskschool"],
+  "author": "SENAC - Programador Web",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-validator": "^7.2.1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/wbuback/senac-taskschool-backend/issues"
-  },
-  "homepage": "https://github.com/wbuback/senac-taskschool-backend#readme"
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
 }
